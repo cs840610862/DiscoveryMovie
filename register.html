@@ -1,0 +1,334 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Discover Movie</title>
+	<style>
+		/* 通用属性 */
+		body{
+			font:12px "microsoft yahei" ,Arial,Helvetica,sans-serif;
+			color:#666;
+			margin:0;
+			padding:0;
+		}
+		ul,li,p,h1,h2,h3,h4,h5,h6,dl,dd{
+			margin:0;
+			padding:0;
+			list-style:none;
+		}
+		.lf{float:left;}
+		.rt{float:right;}
+		.clear{clear:both;}
+		a{
+			color:#8A949A;
+			text-decoration:none;
+		}
+		a:hover{
+			color:#ff0700;
+			text-decoration:underline;
+		}
+		.container{
+			background: #000000;
+		}
+		#head,#footer{
+			width:1210px;
+			margin:0 auto;
+		}
+		#section{
+			width:830px;
+			margin:50px auto;
+		}
+		/********** #head *********/
+		#head{
+			height:76px;
+			padding-top:26px;
+		}
+		#head>a{
+			display:inline-block;
+			width:160px;
+			height:50px;
+			margin-right:30PX;
+		}
+		#head>a>img{
+			width:100%;
+			height:100%;
+		}
+		#head>h1{
+			display:inline-block;
+			font-weight:normal;
+			color:#eee;
+			position:relative;
+			top:-10px;
+		}
+		/********** #underline *********/
+		#underline{
+			/* 高度，背景色渐变 */
+			height:10px;
+			background:linear-gradient(to top,#FEFEFE,#F1F1F1);
+		}
+		/********** #section *********/
+		/********** #aside_left *******/
+		/*
+		#aside_left>div{
+			width:400px;
+			height:52px;
+			padding:0 20px;
+			box-sizing:border-box;
+			border:1px solid #ddd;
+			position:relative;
+		}
+		*/
+		.form_item{
+			width:400px;
+			height:52px;
+			padding:0 20px;
+			box-sizing:border-box;
+			position:relative;
+		}
+		.form_normal{
+			border:1px solid #ddd;
+		}
+		.form_warn{
+			border:1px solid #e4393c;
+		}
+		#aside_left>div>label{
+			/* 宽度，高度，大小，行高 */
+			display:inline-block;
+			width:110px;
+			height:100%;
+			font-size:14px;
+			line-height:50px;
+		}
+		#aside_left>div>input{
+			/* 去边框，去轮廓 */
+			border:0;
+			outline:none;
+			height:19px;
+			width:190px;
+		}
+		#aside_left>div>i{
+			/* 绝对定位,宽度，高度， */
+			display:inline-block;
+			width:16px;
+			height:16px;
+		}
+		.i_states{
+			position:absolute;
+			top:20px;
+			right:20px;
+			background:url(Images/icon.png) no-repeat 0 -117px;
+		}
+		.i_error{
+			margin-right:5px;
+			position:relative;
+			top:2px;
+			background:url(Images/icon.png) no-repeat -17px -100px;
+		}
+		.span_error{
+			color:#e4393c;
+		}
+		.i_remind{
+			margin-right:5px;
+			position:relative;
+			top:2px;
+			background:url(Images/icon.png) no-repeat 0 -100px;
+		}
+		.span_remind{
+			color:#D5C8CF;
+		}
+		#aside_left>div.input_tip{
+			width:400px;
+			height:27px;
+			padding-top:5px;
+			border:0;
+		}
+		#aside_left>div>input[name="authcode"]{
+			width:140px;
+		}
+		#aside_left>div img{
+			/* 宽度，高度，绝对定位 */
+			width:110px;
+			height:46px;
+			position:absolute;
+			top:3px;
+			right:3px;
+		}
+		#aside_left>div>input[type="checkbox"]{
+			width:18px;
+			height:18px;
+			border:solid 1px #cfd1d3;
+			padding:0;
+			margin:0;
+			margin-right:10px;
+			position:relative;
+			top:3px;
+		}
+		#aside_left>div.reg_proto{
+			border:0;
+			height:21px;
+			padding:0;
+			vertical-align:text-top;
+			color:#000;
+		}
+		#aside_left>div.reg_proto a{
+			text-decoration:none;
+			color:#38a;
+		}
+		#aside_left>div>button{
+			width:100%;
+			height:100%;
+			background:#e22;
+			color:#fff;
+			border:0;
+			font-size:16px;
+			outline:0;
+			cursor: pointer;
+		}
+		.register{
+			padding:0;
+			margin:0;
+			border:0;
+		}
+		/********** #footer *********/
+		#footer a{
+			/* 外边距 */
+			margin:0 10px;
+		}
+		#footer .copyright{
+		 text-align:center;
+		 margin:20px 0;
+		}
+		#canas-valid{
+			background: #eeeeee;
+			position: relative;
+			top: 10px;
+			cursor: pointer;
+		}
+	</style>
+ </head>
+ <body>
+	<!-- 头部 -->
+	<div class="container">
+		<header id="head">
+			<!-- logo和欢迎注册，已有账号，请登录 -->
+			<a href="main.html">
+				<img src="Images/logo.png" alt="">
+			</a>
+			<h1>欢迎注册</h1>
+		</header>
+	</div>
+	<div id="underline"></div>
+	<!-- 主体 -->
+	<section id="section">
+		<!-- 左侧 -->
+		<div id="aside_left">
+			<!-- 用户名，密码...... -->
+			<div class="form_item form_normal">
+				<label>用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;&nbsp;名</label>
+				<input name="uname" placeholder="您的用户名">
+				<i class=""></i><!-- 0,-117px -->
+			</div>
+			<div class="input_tip">
+				<i></i>
+				<span></span>
+			</div>
+			<div class="form_item form_normal">
+				<label>设&nbsp;&nbsp;置&nbsp;&nbsp;密&nbsp;&nbsp;码</label>
+				<input name="upwd" type="password" placeholder="请输入密码">
+				<i></i><!-- 0,-117px -->
+			</div>
+			<div class="input_tip">
+				<i></i>
+				<span></span>
+			</div>
+			<div class="form_item form_normal">
+				<label>确&nbsp;&nbsp;认&nbsp;&nbsp;密&nbsp;&nbsp;码</label>
+				<input name="upwd_valid" type="password" placeholder="请再次输入密码">
+				<i></i><!-- 0,-117px -->
+			</div>
+			<div class="input_tip">
+				<i></i>
+				<span></span>
+			</div>
+			<div class="form_item form_normal">
+				<label>手&nbsp;&nbsp;机&nbsp;&nbsp;号&nbsp;&nbsp;码</label>
+				<input name="phone" maxlength=11 placeholder="建议使用常用手机">
+				<i></i><!-- 0,-117px -->
+			</div>
+			<div class="input_tip">
+				<i></i>
+				<span></span>
+			</div>
+			<div class="form_item form_normal">
+				<label>邮&nbsp;&nbsp;箱&nbsp;&nbsp;地&nbsp;&nbsp;址</label>
+				<input name="email" placeholder="请输入您的邮箱地址">
+				<i></i><!-- 0,-117px -->
+			</div>
+			<div class="input_tip">
+				<i></i>
+				<span></span>
+			</div>
+			<div class="form_item form_normal">
+				<label>验&nbsp;&nbsp;&nbsp;证&nbsp;&nbsp;码</label>
+				<input name="authcode" placeholder="请输入验证码">
+				<!-- <img src="Images/image.jpg"> -->
+				<canvas id="canas-valid" height="30PX" width="100px"></canvas>
+			</div>
+			<div class="input_tip">
+				<i></i>
+				<span></span>
+			</div>
+			<!-- 注册协议 -->
+			<div class="reg_proto">
+				<input type="checkbox" checked>
+				我已阅读并同意
+				<a href="javascript:">《探影注册协议》</a>
+			</div>
+			<div class="input_tip">
+				<i></i>
+				<span></span>
+			</div>
+			<!-- 立即注册按钮 -->
+			<div class="form_item form_normal register">
+				<button name="register">立即注册</button>
+			</div>
+		</div>
+		<!-- 右侧 -->
+		<div id="aside_right">
+			<!-- 其他注册方式 -->
+		</div>
+	</section>
+	<!-- 脚部 -->
+	<footer id="footer">
+		<!-- 联系我们 -->
+		<div class="links">
+			<a href="javascript:" target="_blank">关于我们</a>
+			|
+			<a href="javascript:" target="_blank">联系我们</a>
+			|
+			<a href="javascript:" target="_blank">人才招聘</a>
+			|
+			<a href="javascript:" target="_blank">商家入驻</a>
+			|
+			<a href="javascript:" target="_blank">广告服务</a>
+			|
+			<a href="javascript:" target="_blank">手机探影</a>
+			|
+			<a href="javascript:" target="_blank">友情链接</a>
+			|
+			<a href="javascript:" target="_blank">销售联盟</a>
+			|
+			<a href="javascript:" target="_blank">探影社区</a>
+			|
+			<a href="javascript:" target="_blank">探影公益</a>
+			|
+			<a href="javascript:" target="_blank">Eglish Site</a>
+			|
+		</div>
+		<div class="copyright">
+			Copyright©2015-2016&nbsp;探影dmovie.com版权所有
+		</div>
+	</footer>
+	<script src="js/register.js"></script>
+ </body>
+</html>

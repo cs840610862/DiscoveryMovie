@@ -1,0 +1,340 @@
+/*通用*/
+body {
+	font: 12px "microsoft yahei",Arial,Helvetica,sans-serif;
+	color:#333;
+    margin:0px auto;
+    padding:0px;
+	/*background-image:linear-gradient(to right,#999 0,#eee 50%,#999 100%);*/
+}
+ul,li,p,h1,h2,h3,h4,h5,h6,dl,dt,dd {
+    margin:0px;
+    padding:0px;
+    border:none;
+    list-style:none;
+}
+input {border:none;}
+.lf   {float:left;}
+.rt  {float:right;}
+.clear  {clear:both;}
+a{
+	text-decoration:none;
+	color:#333;
+}
+/*整体布局*/
+#top_box,#attention,#content,#main_1,#main_2,#main_3,#more{
+	width:1200px;
+	box-sizing:border-box;
+	margin:0 auto;
+}
+
+/*顶部logo*******************************************/
+#top_box{
+	border-bottom:1px solid #ddd;
+	padding-bottom:25px;
+	height:116px;
+}
+#top_box a{
+	float:right;
+	width:480px;
+	height:142px;
+}
+#top_box a>img{
+	width:100%;
+	height:100%;
+}
+#top_box h1{
+	margin-top:48px;
+	display:inline-block;
+	width:400px;
+}
+#top_box h1 b{
+	font-size:35px;
+}
+/*最受关注*******************************************/
+#attention{
+	min-height:300px;
+	margin-bottom:20px;
+}
+#attention div#containe{
+	min-height:300px;
+}
+#attention p{
+	font-size:15px;
+	margin:10px 0;
+}
+#attention div#containe ul{
+	float:left;
+	margin-left:78px;
+	text-align:center;
+	line-height:22px;
+}
+#attention div#containe ul:first-child{
+	margin-left:0;
+}
+#attention div#containe ul li:last-child{
+	border:1px solid #74AB34;
+	background-color:#74AB34;
+	color:#fff;
+	width:80px;
+	border-radius:20px;
+	margin:15px 0 0 25px;
+	height:23px;
+}
+#attention div#containe ul:nth-child(2) li:last-child,
+#attention div#containe ul:nth-child(5) li:last-child{
+	border:1px solid black;
+	width:90px;
+	border-radius:20px;
+	margin-left:20px;
+	height:23px;
+	background-color:#fff;
+	color:black;
+}
+#attention div#containe ul li i{
+	display:inline-block;
+	width:46px;
+	height:45px;
+	background:url(../img/recent.png) 1px 1px no-repeat;
+	background-color:transparent;
+	position:absolute;
+	margin-top:140px;
+	margin-left:10px;
+}
+#attention #containe ul li{
+	position:relative;
+}
+#containe a{display:block;}
+img{cursor:pointer;}
+ul.s3 li{cursor:pointer;}
+dt,dd{cursor:pointer;}
+/*即将上映***********************************************/
+/**************** js操作css样式 ***************/
+.clickSty{
+	color:#FC6A21;
+	border-bottom:2px solid #fc6a21;
+}
+.unClickSty{
+	border-bottom:2px solid transparent;
+}
+.fade{
+	display:block;
+}
+.out{
+	display:none;
+}
+.bgB{
+	background:url(img/recent.png) -44px -2px no-repeat;
+}
+.bgTarget{
+	background:url(img/recent.png) -58px -2px no-repeat;
+}
+#content{
+	min-height:38px;
+	border-bottom:1px solid #ddd;
+}
+#content ul li b{
+	width:14px;
+	height:15px;
+	display:inline-block;
+}
+#content ul li{
+	float:left;
+	margin-right:40px;
+	font-size:20px;
+}
+#content ul li a{
+	/*color:#FC6A21;*/
+	height:38px;
+	display:inline-block;
+	cursor:pointer;
+}
+#content ul li a:hover b{  
+	background: url(img/recent.png) -58px -2px no-repeat;
+}
+#content ul li a:hover{
+	color:#FC6A21;
+	border-bottom:2px solid #fc6a21;
+}
+/*************详细介绍********************************/
+.main{
+	min-height:1000px;
+}
+.main ul.s1 li{
+	line-height:22px;
+	text-align:center;
+	font-size:14px;
+}
+.main ul.s1{
+	float:left;
+	margin-top:10px;
+}
+.main_box{
+	width:1040px;
+	border-bottom:1px solid #ddd;
+	float:right;
+	padding-bottom:20px;
+	margin-left:50px;
+}
+.main .main_box img{
+	float:left;
+	margin-top:8px;
+}
+.main ul.s2{
+	margin-left:20px;
+	line-height:25px;
+	float:left;
+}
+.main .main_box ul.s2 li:first-child{
+	font-size:20px;
+	margin:12px 0 8px 0;
+}
+.main .main_box ul.s2 li:nth-child(2){
+	margin-bottom:10px;
+}
+.main .main_box ul.s2 li a:hover{
+	color:#6CB8EB;
+}
+/*右侧预告片及新闻*/
+.main .main_box ul.s3 li{
+	float:right;
+	margin-left:30px;
+	height:30px;
+	line-height:30px;
+}
+.main .main_box ul.s3{
+	margin-top:90px;
+	overflow:hidden;
+}
+.main .main_box ul.s3 li i{
+	width:17px;
+	height:19px;
+	background:url(img/recent.png) -72px 1px no-repeat;
+	position:absolute;
+	top:5px;
+	left:0px;
+}
+.main .main_box ul.s3 li a{
+	display:inline-block;
+	text-align:center;
+	height:22px;
+	position:relative;
+	padding-left:20px;
+}
+.main .main_box ul.s3 li a:hover{
+	color:#1f7dd7;
+}
+.main .main_box ul.s3 li:nth-child(1){
+	border:1px solid #ddd;
+	border-radius:10px;
+	text-align:center;
+	width:70px;
+	height:22px;
+	line-height:22px;
+	margin-top:3px;
+	background-color:#F4F4F4;
+}
+.main .main_box ul.s3 li:nth-child(1)>a{
+	padding-left:0;
+}
+.main .main_box p{
+	float:right;
+}
+.main .main_box p b{
+	color:#FC6A21;
+}
+.main div.d1{
+	min-height:220px;
+	margin-top:20px;
+}
+
+
+/****************隐藏即将上映菜单栏***************************/
+
+/****************隐藏有望引进菜单栏**********************/
+
+/****************时光热度菜单栏**********************/
+#main_3 div.d1 span.one{
+	display:inline-block;
+	width:80px;
+	height:80px;
+	background-color:#ccffff;
+	border-radius:50%;
+	color:#fff;
+	font-size:25px;
+	line-height:80px;
+	text-align:center;
+	margin:50px 0 0 20px;
+}
+#main_3>div>div:first-child span:first-child{
+	background-color:#e4393c;
+}
+#main_3>div>div:nth-child(2) span:first-child{
+	background-color:#66cc00;
+}
+#main_3>div>div:nth-child(3) span:first-child{
+	background-color:#cc9933;
+}
+#main_3 div.d1 dl{
+	float:right;
+	margin-top:16px;
+}
+#main_3 div.d1 dl dd,dt{
+	width:100px;
+	height:30px;
+	border:1px solid black;
+	border-radius:17px;
+	text-align:center;
+	line-height:30px;
+	margin-top:40px;
+}
+#main_3 div.d1 dl dt{
+	background-color:#74AB34;
+	border:0;
+}
+
+/*******************加载更多*******************************/
+#more{
+	margin:10px auto 30px;
+}
+#more>a{
+	display: block;
+	border:1px solid #666;
+	color:#333;
+	background-color:#ddd;
+	border-radius:17px;
+	width:100px;
+	height:22px;
+	line-height:22px;
+	text-align: center;
+	margin: 0 auto;
+}
+/********************* 楼梯menuStair ********************/
+#menuStair{
+	position:fixed;
+	top:100px;
+	left:50px;
+	padding:5px 0;
+	display:none;
+}
+#menuStair>li>a{
+	/* 宽度，高度，行高，居中 */
+	display:block;
+	width:80px;
+	font-size:15px;
+	text-align:center;
+	padding:5px 10px;
+	border-bottom:1px dotted #ddd;
+}
+#menuStair>li.scroll>a{
+	color:#FC6A21;
+	font-size:18px;
+	border-bottom-color:#FC6A21;
+	padding-left:30px;
+}
+/****************** 页头设置 *****************/
+#center div.naver a:nth-child(7){
+	color: #F5FE00;
+	border-bottom: 2px solid #F5FE00;
+}
+
+
