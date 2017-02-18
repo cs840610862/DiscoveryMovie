@@ -91,4 +91,19 @@ cscz.prototype.dateForm = function (date,n) {
 	}
 	
 }
+cscz.prototype.quickSort = function (arr) {
+	//找到中间的数字，遍历一次数组，小的放左边，大的放右边，小的拼接上中间的数字，再拼接上右边的数组
+	if(arr.length <= 1){return arr;}
+	var center = arr[Math.floor(arr.length/2)];
+	var left = [], right = [];
+	for(var i=0; i<arr.length; i++){
+		if(i === Math.floor(arr.length/2)){
+		}else if (arr[i] <= center) {
+			left.push(arr[i]);
+		}else if (arr[i]>center) {
+			right.push(arr[i]);
+		}
+	}
+	return this.quickSort(left).concat(center,this.quickSort(right));
+}
 var cs=new cscz();
