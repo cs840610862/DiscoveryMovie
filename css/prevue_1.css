@@ -105,9 +105,14 @@ a{
   content: " ";
   clear: both;
 }
+.v-slider:after{
+  content: " ";
+  display: table;
+  clear: both;
+}
 .v-slider ul li{
-  display: inline-block;
-  margin-right: 25px;
+  float: left;
+  margin-right: 16px;
   margin-bottom: 10px;
 }
 .v-slider a.img-show{
@@ -139,6 +144,7 @@ a.img-show em{
 }
 .v-slider p{
   padding: 3px 0;
+  max-width: 220px;
 }
 /*********************** comment-play **********************/
 #play-comment{
@@ -171,7 +177,6 @@ a.img-show em{
   border: 1px solid #EAEAEA;
   border-radius: 5px;
   position: relative;
-  overflow: hidden;
 }
 .post-box>p{
   display: none;

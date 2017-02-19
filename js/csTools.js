@@ -76,7 +76,6 @@ cscz.prototype.dateForm = function (date,n) {
 	//n=1返回yy-mm-dd
 	//n=2返回hh:mm:ss
 	//n=3返回yy-mm-dd hh:mm:ss
-	console.log(date)
 	if(n === 1){
 		return this.prefix(date.getFullYear())+"-"+
 			this.prefix(date.getMonth()+1)+"-"+ this.prefix(date.getDate());

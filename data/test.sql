@@ -97,8 +97,13 @@ INSERT INTO replay_comment VALUES
 (NULL,11,'你说的有道理',1452635896589,10),
 (NULL,12,'你说的有道理',1452635896589,11)
 ;
-
-
+#看了还会看
+CREATE TABLE prevue_review(
+	prid INT PRIMARY KEY AUTO_INCREMENT,
+	imgsrc VARCHAR(1024),
+	mname VARCHAR(64),
+	actors VARCHAR(128)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 
