@@ -89,7 +89,6 @@ cscz.prototype.dateForm = function (date,n) {
 			+' '+this.prefix(date.getHours())+":"+
 			this.prefix(date.getMinutes())+":"+ this.prefix(date.getSeconds());
 	}
-	
 }
 cscz.prototype.quickSort = function (arr) {
 	//找到中间的数字，遍历一次数组，小的放左边，大的放右边，小的拼接上中间的数字，再拼接上右边的数组
