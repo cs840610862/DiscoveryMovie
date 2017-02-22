@@ -1,4 +1,5 @@
 <?php
+	
 	header('Content-Type:text/plain');
 	@$uname=$_REQUEST['uname'] or die('uname required');
 	@$upwd=$_REQUEST['upwd'] or die('upwd required');
