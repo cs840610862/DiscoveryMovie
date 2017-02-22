@@ -1,5 +1,4 @@
 var prevue_info = {};
-prevue_info.sendData = cs.urlToObject(decodeURIComponent(location.href));
 
 /* 功能1：异步加载页头和页尾 */
 window.onload = function () {
@@ -12,12 +11,12 @@ window.onload = function () {
 			document.querySelector("#head").innerHTML=data;
 			//登录处理
 			//如果登录账号已经保存，则直接自动登录
-			/*
+			
 			if(d_uname && d_upwd){
 				log_succ_handle();
 				return;
 			}
-			// 绑定登录框按钮单击事件 
+			// 绑定登录框登录按钮，注销按钮单击事件 
 			document.querySelector("#head").onclick=function(e){
 				if(e.target.className==="btn_log"){
 					document.querySelector("#log_face").style.display="block";
@@ -31,15 +30,15 @@ window.onload = function () {
 				document.getElementById("log_face").style.display="none";
 			}
 
+			// 点击登录，异步验证用户名和按钮
 			document.querySelector("#log_face button[name='login']").onclick=function(){
-				//发送异步请求，发送用户名和密码进行验证
-				if(document.querySelector("p.pwd_deal input[type='checkbox']").checked){
+				/*if(document.querySelector("p.pwd_deal input[type='checkbox']").checked){
 					d_uname=localStorage['d_uname']=document.querySelector("input[name='uname']").value;
 					d_upwd=localStorage['d_upwd'] =document.querySelector("input[name='upwd']").value;
 				}else{
 					d_uname=sessionStorage['d_uname']=document.querySelector("input[name='uname']").value;
 					d_upwd=sessionStorage['d_upwd'] =document.querySelector("input[name='upwd']").value;
-				}
+				}*/
 				var xhr=new XMLHttpRequest();
 				xhr.onreadystatechange=function(){
 					if(this.readyState===4){
@@ -54,6 +53,15 @@ window.onload = function () {
 				xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 				xhr.send("uname=" + d_uname + "&upwd=" + d_upwd);
 				function doresponse(xhr){
+					console.log('login success');
+					// 登陆成功则保存用户名和密码到webStorage
+					if(document.querySelector("p.pwd_deal input[type='checkbox']").checked){
+						d_uname=localStorage['d_uname']=document.querySelector("input[name='uname']").value;
+						d_upwd=localStorage['d_upwd'] =document.querySelector("input[name='upwd']").value;
+					}else{
+						d_uname=sessionStorage['d_uname']=document.querySelector("input[name='uname']").value;
+						d_upwd=sessionStorage['d_upwd'] =document.querySelector("input[name='upwd']").value;
+					}
 					var res=xhr.responseText;
 					if(res==="succ"){
 						log_succ_handle();
@@ -61,14 +69,15 @@ window.onload = function () {
 						//用户名或密码错误，跳转到错误处理页面
 					}
 				}
-			};*/
+			};
 			function log_succ_handle(){
+				console.log('success handle');
 				//存在用户名，隐藏遮罩层，登录和注册隐藏，提示欢迎回来xxx，提示登录成功
 				document.querySelector("#login .btn").className="btn none";
 				document.querySelector("#login p").className="block";
 				document.querySelector("#login p").innerHTML="欢迎回来！用户："+d_uname+" <button class='logout'>注销</button>";
+				//移除localstorage，显示登录框
 				document.querySelector("#login button.logout").onclick= function (e) {
-					//移除localstorage，显示登录框
 					localStorage.removeItem('d_uname');
 					localStorage.removeItem('d_upwd');
 					sessionStorage.removeItem('d_uname');
@@ -76,11 +85,11 @@ window.onload = function () {
 					history.go(0);
 				}
 			}
-			/*
+			
 			cs.query("#log_face button[name='register']").onclick=function(){
 				location.href="register.html";
 			}
-			*/
+			
 		},
 		error:function(){
 			alert("响应完成但有问题！！！");
@@ -100,6 +109,7 @@ window.onload = function () {
 }
 
 // 异步加载看了还会看
+/*
 cs.ajax({
 	type:'GET',
 	url:'data/prevue_load_review.php',
@@ -124,7 +134,7 @@ cs.ajax({
 		cs.query('div.v-slider>ul').innerHTML = html;
 	}
 });
-
+*/
 //功能：异步加载个人信息
 cs.ajax({
 	type:'POST',
@@ -143,6 +153,8 @@ cs.ajax({
 
 /* 功能：异步加载影评 */
 function ajax_comment_load () {
+	// 把地址栏的电影名字解析成键值对，保存在对象中
+	prevue_info.sendData = cs.urlToObject(decodeURIComponent(location.href));
 	cs.ajax({
 		type:'POST',
 		url:'data/prevue_movie_comments.php',
@@ -201,7 +213,6 @@ function ajax_comment_load () {
 				`;
 			}
 			cs.query(".c-comment-reply .all-comments").innerHTML = html;
-			comment_reply();
 		},
 		error:function (error) {
 			console.log(error);
@@ -268,57 +279,54 @@ function publish_result (comment_btn, showText) {
 	2.回复之后保存到数据库并隐藏回复框
 	3.实时加载回复的评论数据
 */
-function comment_reply() {
-	// 检查回复评论还能输入的字数
-	cs.query('.all-comments').addEventListener('keyup', function (e) {
-		var tar = e.target;
-		if(tar.nodeName === 'TEXTAREA'){
-			still_input_words(tar);
+// 检查回复评论还能输入的字数
+cs.query('.all-comments').addEventListener('keyup', function (e) {
+	var tar = e.target;
+	if(tar.nodeName === 'TEXTAREA'){
+		still_input_words(tar);
+	}
+});
+// 点击回复弹出回复框
+cs.query(".all-comments").addEventListener('click', function (e) {
+	var tar = e.target;
+	if(tar.className.match(/\breplay\b/)){
+		// 切换显示回复框
+		var elem = tar.parentNode.nextElementSibling;
+		if (elem.className.match(/\bnone\b/)) {
+			elem.className = 'replaybox';
+		}else{
+		 	elem.className = 'replaybox none';
 		}
-	});
-	// 点击回复弹出回复框
-	cs.query(".all-comments").addEventListener('click', function (e) {
-		var tar = e.target;
-		if(tar.className.match(/\breplay\b/)){
-			// 切换显示回复框
-			var elem = tar.parentNode.nextElementSibling;
-			if (elem.className.match(/\bnone\b/)) {
-				elem.className = 'replaybox';
-			}else{
-			 	elem.className = 'replaybox none';
-			}
-		}else if (tar.className.match(/\bpublish-comment\b/)) {
-			// 回复评论并且保存到数据库
-			console.log(tar);
-			// 判断文本域的字数
-			var cArea = tar.parentNode.parentNode.querySelector('textarea');
-			if(cArea.value.length >= 2){
-				// 符合条件就回复
-				var uname = sessionStorage['d_uname'] || localStorage['d_uname'];
-				var content = cArea.value;
-				var pid = tar.getAttribute('data-pid');
-				cs.ajax({
-					type:"POST",
-					url:'data/prevue_replay_comment.php',
-					data:{uname:uname,content:content,pid:pid},
-					success:function (data) {
-						if(data.rid >= 0){
-							// 发表成功，刷新回复评论区域
-							tar.parentNode.parentNode.querySelector('span.remain-font').innerHTML = `还可以输入150字`;
-							var user_replay = tar.parentNode.parentNode.parentNode
-								.parentNode.querySelector('.userreplay');
-							tar.parentNode.parentNode.parentNode.className = "replaybox none";
-							user_replay.className = "userreplay";
-						}
+	}else if (tar.className.match(/\bpublish-comment\b/)) {
+		// 回复评论并且保存到数据库
+		console.log(tar);
+		// 判断文本域的字数
+		var cArea = tar.parentNode.parentNode.querySelector('textarea');
+		if(cArea.value.length >= 2){
+			// 符合条件就回复
+			var uname = sessionStorage['d_uname'] || localStorage['d_uname'];
+			var content = cArea.value;
+			var pid = tar.getAttribute('data-pid');
+			cs.ajax({
+				type:"POST",
+				url:'data/prevue_replay_comment.php',
+				data:{uname:uname,content:content,pid:pid},
+				success:function (data) {
+					if(data.rid >= 0){
+						// 发表成功，刷新回复评论区域
+						tar.parentNode.parentNode.querySelector('span.remain-font').innerHTML = `还可以输入150字`;
+						var user_replay = tar.parentNode.parentNode.parentNode
+							.parentNode.querySelector('.userreplay');
+						tar.parentNode.parentNode.parentNode.className = "replaybox none";
+						user_replay.className = "userreplay";
 					}
-				});
-			}else{
-				publish_result(tar, '字数过少，不能少于2字符');
-			}
+				}
+			});
+		}else{
+			publish_result(tar, '字数过少，不能少于2字符');
 		}
-	});
-}
-
+	}
+});
 
 
 
