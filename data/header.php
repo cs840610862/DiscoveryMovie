@@ -22,13 +22,13 @@
 			</div>
 			<div class="naver">
 				<a title="首页" href="main.html">首页</a>
-				<img src="images/you.gif">
+				<img src="Images/you.gif">
 				<a title="电影分类" href="time.html">电影分类</a>
-				<img src="images/you.gif">
+				<img src="Images/you.gif">
 				<a title="电影原声" href="javascript:;">口碑排行</a>
-				<img src="images/you.gif">
+				<img src="Images/you.gif">
 				<a title="即将上映" href="newMovie.html">即将上映</a>
-				<img src="images/you.gif">
+				<img src="Images/you.gif">
 			</div>
 			<div id="click">
 				<div class="tt">

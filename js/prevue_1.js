@@ -109,7 +109,7 @@ window.onload = function () {
 }
 
 // 异步加载看了还会看
-/*
+
 cs.ajax({
 	type:'GET',
 	url:'data/prevue_load_review.php',
@@ -132,9 +132,12 @@ cs.ajax({
 		}
 
 		cs.query('div.v-slider>ul').innerHTML = html;
+	},
+	error:function (data) {
+		console.log(data)
 	}
 });
-*/
+
 //功能：异步加载个人信息
 cs.ajax({
 	type:'POST',
