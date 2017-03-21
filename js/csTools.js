@@ -1,7 +1,7 @@
 //创建构造函数
-function cscz(){}
+function cscz() {}
 //发送异步请求
-cscz.prototype.ajax=function(obj){
+cscz.prototype.ajax = function(obj) {
 	/*
 		obj={
 			type:,		//请求消息类型
@@ -11,97 +11,99 @@ cscz.prototype.ajax=function(obj){
 			error:,		//失败时候调用的函数
 		}
 	*/
-	obj.type=obj.type || "POST";
-	if(obj.data){
-		var data="";
-		for(var key in obj.data){
+	obj.type = obj.type || "POST";
+	if (obj.data) {
+		var data = "";
+		for (var key in obj.data) {
 			data += `${key}=${obj.data[key]}&`;
 		}
-		data=data.slice(0,-1);
-	}else{
-		var data=null;
+		data = data.slice(0, -1);
+	} else {
+		var data = null;
 	};
-	var xhr=new XMLHttpRequest();
-	xhr.onreadystatechange=function(){
-		if(this.readyState===4){
-			var data=this.responseText;
-			if(data){	//data不为空时
-				try{
-					data=JSON.parse(data);
-				}catch(err){}
-			}else{		//data为空的时候
-				
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		if (this.readyState === 4) {
+			var data = this.responseText;
+			if (data) { //data不为空时
+				try {
+					data = JSON.parse(data);
+				} catch (err) {}
+			} else { //data为空的时候
+
 			}
-			if(this.status===200){
-				obj.success !== undefined && obj.success(data,"success",xhr);
-			}else{
+			if (this.status === 200) {
+				obj.success !== undefined && obj.success(data, "success", xhr);
+			} else {
 				obj.error !== undefined && obj.error(data);
 			}
 		}
 	}
-	obj.type==='GET' && (obj.url += ('?'+data));
-	xhr.open(obj.type,obj.url,true);
-	obj.type==='POST' &&
-	xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-	if(obj.type==='POST'){
+	obj.type === 'GET' && (obj.url += ('?' + data));
+	xhr.open(obj.type, obj.url, true);
+	obj.type === 'POST' &&
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	if (obj.type === 'POST') {
 		xhr.send(data);
-	}else{
+	} else {
 		xhr.send(null);
 	}
 }
-cscz.prototype.getById=function(idName){
+cscz.prototype.getById = function(idName) {
 	return document.getElementById(idName);
 }
-cscz.prototype.query=function(selector){
+cscz.prototype.query = function(selector) {
 	return document.querySelector(selector);
 };
-cscz.prototype.queryAll=function(selector){
+cscz.prototype.queryAll = function(selector) {
 	return document.querySelectorAll(selector);
 };
-cscz.prototype.urlToObject = function (url) {
+cscz.prototype.urlToObject = function(url) {
 	/* 把url转化为对象并返回 */
 	var sendData = url.split('?')[1];
 	var arr = sendData.split('&');
-	var obj = {},arr2 = [];
-	for(var i=0; i<arr.length; i++){
+	var obj = {},
+		arr2 = [];
+	for (var i = 0; i < arr.length; i++) {
 		arr2 = arr[i].split("=");
 		obj[arr2[0]] = arr2[1];
 	}
 	return obj;
 }
-cscz.prototype.prefix = function (data) {
-	return data<10 ? "0"+data : ""+data;
+cscz.prototype.prefix = function(data) {
+	return data < 10 ? "0" + data : "" + data;
 }
-cscz.prototype.dateForm = function (date,n) {
+cscz.prototype.dateForm = function(date, n) {
 	//n=1返回yy-mm-dd
 	//n=2返回hh:mm:ss
 	//n=3返回yy-mm-dd hh:mm:ss
-	if(n === 1){
-		return this.prefix(date.getFullYear())+"-"+
-			this.prefix(date.getMonth()+1)+"-"+ this.prefix(date.getDate());
-	}else if(n === 2){
-		return this.prefix(date.getHours())+":"+
-			this.prefix(date.getMinutes())+":"+ this.prefix(date.getSeconds());
-	}else if (n === 3) {
-		return this.prefix(date.getFullYear())+"-"+
-			this.prefix((date.getMonth()+1))+"-"+ this.prefix(date.getDate())
-			+' '+this.prefix(date.getHours())+":"+
-			this.prefix(date.getMinutes())+":"+ this.prefix(date.getSeconds());
+	if (n === 1) {
+		return this.prefix(date.getFullYear()) + "-" +
+			this.prefix(date.getMonth() + 1) + "-" + this.prefix(date.getDate());
+	} else if (n === 2) {
+		return this.prefix(date.getHours()) + ":" +
+			this.prefix(date.getMinutes()) + ":" + this.prefix(date.getSeconds());
+	} else if (n === 3) {
+		return this.prefix(date.getFullYear()) + "-" +
+			this.prefix((date.getMonth() + 1)) + "-" + this.prefix(date.getDate()) + ' ' + this.prefix(date.getHours()) + ":" +
+			this.prefix(date.getMinutes()) + ":" + this.prefix(date.getSeconds());
 	}
 }
-cscz.prototype.quickSort = function (arr) {
+cscz.prototype.quickSort = function(arr) {
 	//找到中间的数字，遍历一次数组，小的放左边，大的放右边，小的拼接上中间的数字，再拼接上右边的数组
-	if(arr.length <= 1){return arr;}
-	var center = arr[Math.floor(arr.length/2)];
-	var left = [], right = [];
-	for(var i=0; i<arr.length; i++){
-		if(i === Math.floor(arr.length/2)){
-		}else if (arr[i] <= center) {
+	if (arr.length <= 1) {
+		return arr;
+	}
+	var center = arr[Math.floor(arr.length / 2)];
+	var left = [],
+		right = [];
+	for (var i = 0; i < arr.length; i++) {
+		if (i === Math.floor(arr.length / 2)) {} else if (arr[i] <= center) {
 			left.push(arr[i]);
-		}else if (arr[i]>center) {
+		} else if (arr[i] > center) {
 			right.push(arr[i]);
 		}
 	}
-	return this.quickSort(left).concat(center,this.quickSort(right));
+	return this.quickSort(left).concat(center, this.quickSort(right));
 }
-var cs=new cscz();
+var cs = new cscz();
